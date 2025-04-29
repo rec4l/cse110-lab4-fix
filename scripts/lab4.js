@@ -6,15 +6,18 @@
  * @returns The sum of the two numbers if add is true and false otherwise.
  */
 function sumValues(num1, num2, add) {
+    if (!Number.isInteger(num1) || !Number.isInteger(num2)) {
+        return false;
+    }
     if (add) {
-        const result = 0;
+        let result = 0;
 
         result = num1 + num2;
 
         return result;
     }
     else {
-        return !add;
+        return false;
     }
 }
 
@@ -27,13 +30,26 @@ function sumValues(num1, num2, add) {
 function discountPrices(prices, discount) {
     const discounted = []
     const length = prices.length;
-    let discountedPrice = 0
-    for(let i = 0; i < length; i++) {
-        discountedPrice += prices[i] * (1 - discount);
-        discounted.push(discountedPrice);
+    let discountedPrice = 0;
+
+    if (length === 0 || !Array.isArray(prices)) {
+        return false;
+    }
+
+    if (isNaN(discount)) {
+        return false;
+    }
+
+    for (let i = 0; i < length; i++) {
+        discountedPrice = prices[i] * (1 - discount);
+        if (discountedPrice >= 0) {
+            discounted.push(discountedPrice);
+        }
     }
 
     return discounted;
 }
+
+console.log(discountPrices([10, 20, 30,40], 1));
 
 module.exports = {sumValues, discountPrices};
