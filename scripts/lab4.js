@@ -6,6 +6,9 @@
  * @returns The sum of the two numbers if add is true and false otherwise.
  */
 function sumValues(num1, num2, add) {
+    if (!Number.isInteger(num1) || !Number.isInteger(num2)) {
+        return false;
+    }
     if (add) {
         let result = 0;
 
@@ -29,10 +32,10 @@ function discountPrices(prices, discount) {
     const length = prices.length;
     let discountedPrice = 0;
 
-    if (!Number.isInteger(discount)) {
+    if (isNaN(discount)) {
         return false;
     }
-    
+
     for (let i = 0; i < length; i++) {
         discountedPrice = prices[i] * (1 - discount);
         if (discountedPrice > 0) {
@@ -42,5 +45,7 @@ function discountPrices(prices, discount) {
 
     return discounted;
 }
+
+console.log(discountPrices([10, 20, 30], 0.1));
 
 module.exports = {sumValues, discountPrices};
